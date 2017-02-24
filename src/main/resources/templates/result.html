@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transport Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Transport</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Transport RealTime Example</h1>
+
+        <h2>Requested values</h2>
+
+
+        <p> Latitude: <span th:text="${transportListRequest.latitude}">Latitude</span></p>
+        <p> Longitude: <span th:text="${transportListRequest.longitude}">Longitude</span></p>
+        <p> Station: <span th:text="${transportListRequest.station != null}? *{transportListRequest.station} : ''">Station</span></p>
+        <p>
+            Time: <span th:text="${transportListRequest.requestedtime}">Requested Time</span>
+            <span th:text="${transportListRequest.error != null}? *{transportListRequest.error} : ''"></span>
+        </p>
+
+        <hr/>
+        <h2>Resulting schedule</h2>
+        <h3 class="title" th:text="${transportList.station}">Station</h3>
+        <ul>
+            <li class="transportInfo.line" th:text="${transportList.transportInfo.line}">TransportInfo Line</li>
+            <li class="transportInfo.destination" th:text="${transportList.transportInfo.destination}">TransportInfo Destination</li>
+            <li class="transportInfo.scheduled_departure_time" th:text="${transportList.transportInfo.scheduled_departure_time}">TransportInfo Scheduled Departure Time</li>
+            <li class="transportInfo.expected_departure_time" th:text="${transportList.transportInfo.expected_departure_time}">TransportInfo Expected Departure Time</li>
+        </ul>
+
+        <hr/>
+        <p><a href="/">Do a new request</a> (note that your current results will be lost)</p>
+        <hr/>
+        Current time: <b th:text="${execInfo.now.time}"></b>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

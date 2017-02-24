@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transport Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Transport</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Transport RealTime Example</h1>
+
+        <h2>Enter your details</h2>
+        <form action="#" th:action="@{/gettransportlist}" th:object="${transportListRequest}" method="post">
+            <p>Your location:</p>
+            <p>
+                Enter Latitude: <input type="number" max="90" min="-90" step="any" th:field="*{latitude}" value=""/>
+                And Longitude: <input type="number" max="180" min="-180" step="any" th:field="*{longitude}" value=""/>
+            </p>
+            <p>
+                Or select your station (if a station is selected latitude/longitude pair is ignored):
+                <select th:field="*{station}">
+                    <option th:value="None" selected="selected">None</option>
+                    <option th:each="station : ${stations}"
+                            th:value="${station}"
+                            th:text="${station.name}">Station</option>
+                </select>
+            </p>
+            <p>
+                Desired departure time: <input type="datetime-local" th:field="*{requestedtime}" required="required"/>
+            </p>
+            <p>
+                <input type="submit" value="Request real time schedule" />
+                <input type="reset" value="Reset" />
+            </p>
+        </form>
+
+        <hr/>
+
+        Current time: <b th:text="${execInfo.now.time}"></b>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
